@@ -1,0 +1,6 @@
+<section class="tools-layers">
+  <div #layersWrap (click)="initialClick($event)" class="layers-wrapper">
+    <!--<div *ngFor="let layer of storageLayers, let idx = index" [attr.id]="'layer-' + (idx + 1)" class="tools-layers-item"></div>-->
+  </div>
+  <button (click)="addLayer()" [disabled]="disableButton" class="add-layer">Add new frame</button>
+</section>

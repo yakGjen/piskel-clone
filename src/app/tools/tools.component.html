@@ -1,0 +1,48 @@
+<section class="tools">
+  <div class="tools-size">
+    <div class="tools-size-item"><div></div></div>
+    <div class="tools-size-item"><div></div></div>
+    <div class="tools-size-item"><div></div></div>
+    <div class="tools-size-item"><div></div></div>
+  </div>
+  <div #toolsItems (click)="getTool($event)" class="tools-items">
+    <div #bucket data-tool="bucket" class="tools-items-item tools-items-bucket">
+      <i class="fas fa-fill-drip"></i>
+    </div>
+    <div #pen data-tool="pen" class="tools-items-item tools-items-pen">
+      <i class="fas fa-pen"></i>
+    </div>
+    <div #eraser data-tool="eraser" class="tools-items-item tools-items-eraser">
+      <i class="fas fa-eraser"></i>
+    </div>
+    <div class="tools-items-item"></div>
+    <div class="tools-items-item"></div>
+    <div class="tools-items-item"></div>
+    <div class="tools-items-item"></div>
+    <div class="tools-items-item"></div>
+  </div>
+  <div class="tools-colors">
+    <p>Select color:</p>
+    <select (click)="getColor($event)" name="colors" id="">
+      <option value="transparent">transparent</option>
+      <option value="#000000">black</option>
+      <option value="#FFFFFF">white</option>
+      <option value="#FF0000">red</option>
+      <option value="#FFFF00">yellow</option>
+      <option value="#008000">green</option>
+      <option value="#FFC0CB">pink</option>
+      <option value="#FFA500">orange</option>
+      <option value="#0000FF">blue</option>
+      <option value="#808080">grey</option>
+      <option value="#FF00FF">fuchsia</option>
+    </select>
+  </div>
+  <div class="tools-canvas-size">
+    <p>Select canvas size:</p>
+    <div (click)="getSize($event)">
+      <button data-canvas-size="32">32 x 32</button>
+      <button data-canvas-size="64">64 x 64</button>
+      <button data-canvas-size="128">128 x 128</button>
+    </div>
+  </div>
+</section>
