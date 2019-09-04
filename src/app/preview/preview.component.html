@@ -1,7 +1,8 @@
 <div class="preview-wrapper">
-  <canvas #previewElem width="256" height="256" class="preview-field" (click)="showLayers()"></canvas>
+  <canvas #previewElem width="256" height="256" class="preview-field"></canvas>
   <div class="preview-buttons">
     <input type="range" min="1" max="60" [(ngModel)]="valueFps" (input)="changeFps()">
     <span>{{ valueFps }} fps</span>
   </div>
+  <p>Canvas size: {{ xSize }}px * {{ ySize }}px</p>
 </div>

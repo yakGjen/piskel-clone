@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {RedrawEventService} from '../shared/redraw-event.service';
+import {UpdateCanvasSizeService} from '../shared/update-canvas-size.service';
 
 @Component({
   selector: 'app-layers',
@@ -21,9 +22,14 @@ export class LayersComponent implements OnInit {
   @ViewChild('layersWrap') layersWrapObj;
   layersWrapper;
 
-  constructor(private redrawCanvas: RedrawEventService) { }
+  constructor(
+    private redrawCanvas: RedrawEventService,
+    private updateCanvasSizeEvent: UpdateCanvasSizeService
+  ) { }
 
   ngOnInit() {
+    this.updateCanvasSizeEvent.updateCanvasSize.subscribe(() => this.updateCanvasSize());
+
     this.layersWrapper = this.layersWrapObj.nativeElement;
 
     /*this.addLayer();
@@ -150,6 +156,17 @@ export class LayersComponent implements OnInit {
 
     this.selectNumbLayer.emit(+elem.dataset.numbLayer);
     this.redrawCanvas.redrawEvent.emit();
+  }
+
+  updateCanvasSize() {
+    console.log('clear layers storage');
+    this.storageLayers.forEach((layer) => {
+      this.layersWrapper.removeChild(layer);
+    });
+    this.storageLayers = [];
+
+    this.addLayer();
+    this.selectLayer(this.storageLayers[0]);
   }
 
 }

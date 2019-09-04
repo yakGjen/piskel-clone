@@ -7,6 +7,15 @@ import { CanvasComponent } from './canvas/canvas.component';
 import { ToolsComponent } from './tools/tools.component';
 import { PreviewComponent } from './preview/preview.component';
 import {FormsModule} from '@angular/forms';
+import { HelloComponent } from './hello/hello.component';
+import {RouterModule, Routes} from '@angular/router';
+import { MainComponent } from './main/main.component';
+
+const routes: Routes = [
+  {path: '', component: HelloComponent},
+  {path: 'main', component: MainComponent},
+  {path: '**', redirectTo: '/'}
+];
 
 @NgModule({
   declarations: [
@@ -14,11 +23,14 @@ import {FormsModule} from '@angular/forms';
     LayersComponent,
     CanvasComponent,
     ToolsComponent,
-    PreviewComponent
+    PreviewComponent,
+    HelloComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]

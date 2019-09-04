@@ -1,4 +1,5 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {UpdateCanvasSizeService} from '../shared/update-canvas-size.service';
 
 @Component({
   selector: 'app-preview',
@@ -6,6 +7,8 @@ import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
   styleUrls: ['./preview.component.css']
 })
 export class PreviewComponent implements OnInit, OnDestroy {
+
+  constructor(private updateCanvasSizeEvent: UpdateCanvasSizeService) {}
 
   @ViewChild('previewElem') previewElem;
   @Input() layers;
@@ -23,13 +26,19 @@ export class PreviewComponent implements OnInit, OnDestroy {
   valueFps = 10;
 
   ngOnInit() {
+    this.updateCanvasSizeEvent.updateCanvasSize.subscribe(() => {
+      this.gridCoordinats = [];
+
+      setTimeout(() => {
+        console.log(this.xSize, this.ySize);
+        this.getGridCoordinats(this.xSize, this.ySize);
+        this.animation();
+      }, 0);
+    });
+
     this.canvasContext = this.previewElem.nativeElement.getContext('2d');
     this.getGridCoordinats(this.xSize, this.ySize);
     this.animation();
-  }
-
-  showLayers() {
-    console.log(this.layers);
   }
 
   ngOnDestroy() {
@@ -58,6 +67,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
     let frame = 0;
     clearInterval(this.timerId);
     const fps = 1000 / val;
+
     this.timerId = setInterval(() => {
       if (frame >= this.layers.length) {
         frame = 0;
@@ -71,5 +81,4 @@ export class PreviewComponent implements OnInit, OnDestroy {
       frame++;
     }, fps);
   }
-
 }

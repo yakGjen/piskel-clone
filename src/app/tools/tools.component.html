@@ -39,7 +39,10 @@
   </div>
   <div class="tools-canvas-size">
     <p>Select canvas size:</p>
-    <div (click)="getSize($event)">
+    <div
+      class="tools-canvas-size-buttons"
+      (click)="getSize($event)"
+    >
       <button data-canvas-size="32">32 x 32</button>
       <button data-canvas-size="64">64 x 64</button>
       <button data-canvas-size="128">128 x 128</button>

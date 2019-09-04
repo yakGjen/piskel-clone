@@ -1,0 +1,33 @@
+<section class="toolbar">
+  <app-tools
+    (giveColor)="takeColor($event)"
+    (giveTool)="takeTool($event)"
+    (giveSize)="takeSize($event)"
+  ></app-tools>
+  <app-layers
+    (selectNumbLayer)="selectNumbLayer($event)"
+    (addLayerEvent)="addLayer()"
+    (deleteLayerEvent)="deleteLayer($event)"
+    (copyLayerEvent)="copyLayer($event)"
+    [layers]="layers"
+  ></app-layers>
+</section>
+<section class="canvas">
+  <app-canvas
+      #canvas
+      [selectedColor]="selectedColor"
+      [toolInfo]="toolInfo"
+      [widthCell]="widthCell"
+      [heightCell]="heightCell"
+      [layer]="selectedLayer"
+      [xSize]="xSize"
+      [ySize]="ySize"
+  ></app-canvas>
+</section>
+<section class="preview">
+  <app-preview
+    [layers]="layers"
+    [xSize]="xSize"
+    [ySize]="ySize"
+  ></app-preview>
+</section>

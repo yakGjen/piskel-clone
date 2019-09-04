@@ -1,15 +1,14 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {UpdateCanvasSizeService} from './shared/update-canvas-size.service';
+import {UpdateCanvasSizeService} from '../shared/update-canvas-size.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.css']
 })
-export class AppComponent implements OnInit {
-  ngOnInit(): void {}
+export class MainComponent implements OnInit {
 
-  /*constructor(private updateCanvasSizeEvent: UpdateCanvasSizeService) {}
+  constructor(private updateCanvasSizeEvent: UpdateCanvasSizeService) {}
 
   @ViewChild('canvas') canvas;
   layers = [];
@@ -91,5 +90,6 @@ export class AppComponent implements OnInit {
     this.layers = [];
 
     this.updateCanvasSizeEvent.updateCanvasSize.emit();
-  }*/
+  }
+
 }

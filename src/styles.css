@@ -105,6 +105,13 @@ body {
   border: solid 2px #888888;
   cursor: pointer;
 }
+.tools-canvas-size-buttons {
+  display: flex;
+  flex-direction: column;
+}
+.tools-canvas-size-buttons > button:not(:last-child) {
+  margin-bottom: 5px;
+}
 .layer-info {
   width: 25px;
   height: 25px;
