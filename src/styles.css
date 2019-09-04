@@ -5,7 +5,11 @@ body {
 }
 .wrapper {
   max-width: 1600px;
+  min-height: 100vh;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   color: #ffffff;
 }
 .header {
@@ -26,27 +30,19 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
-.main {
-  background: #1d1d1d;
-  display: flex;
-}
-.main > section {
-  /*display: inline-block;*/
-  /*box-sizing: border-box;
-    border: solid 1px red;*/
-}
 .toolbar {
   width: 20%;
   display: flex !important;
-  justify-content: center;
+  justify-content: space-around;
 }
-.toolbar > section {
+.toolbar > .tools {
   width: 50%;
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
   box-sizing: border-box;
-  border: solid 1px yellow;
+  /*border: solid 1px yellow;*/
 }
 .toolbar .tools-size {
   text-align: center;
@@ -149,12 +145,12 @@ body {
   cursor: pointer;
 }
 .canvas {
-  width: 60%;
+  /*width: 60%;
   min-width: 600px;
-  height: 570px;
+  height: 570px;*/
   display: flex;
   justify-content: center;
-  background: #a0a0a0;
+  align-items: center;
 }
 .canvas canvas {
   background: #6b806a;
@@ -168,12 +164,8 @@ body {
   display: flex;
   justify-content: center;
 }
-/*.preview-wrapper {
-  box-sizing: border-box;
-}*/
 .preview-field {
-  /*width: 256px;
-  height: 256px;*/
+  background: #6b806a;
   border: solid 1px #a0a0a0;
 }
 .preview-buttons {
