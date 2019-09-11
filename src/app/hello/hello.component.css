@@ -1,0 +1,32 @@
+.logged-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logged-form {
+  max-width: 300px;
+}
+
+.logged-form > input {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.logged-form > button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: none;
+  background: #ffd700;
+}
+
+.logged-notification {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.logged-notification > p {
+  margin: 0;
+}

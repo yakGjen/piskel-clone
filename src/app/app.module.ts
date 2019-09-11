@@ -10,10 +10,11 @@ import {FormsModule} from '@angular/forms';
 import { HelloComponent } from './hello/hello.component';
 import {RouterModule, Routes} from '@angular/router';
 import { MainComponent } from './main/main.component';
+import {AuthGuardServiceService} from './shared/auth/auth-guard-service.service';
 
 const routes: Routes = [
   {path: '', component: HelloComponent},
-  {path: 'main', component: MainComponent},
+  {path: 'main', component: MainComponent, canActivate: [AuthGuardServiceService]},
   {path: '**', redirectTo: '/'}
 ];
 

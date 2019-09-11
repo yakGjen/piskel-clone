@@ -1,3 +1,21 @@
-<p>
-  hello works!
-</p>
+<section class="logged-form-wrapper">
+  <form class="logged-form">
+    <label for="form-login">
+      Login:
+    </label>
+    <input id="form-login" type="text" name="loginForm" [(ngModel)]="loginForm" (input)="sendData()">
+    <label for="form-password">
+      Password:
+    </label>
+    <input id="form-password" type="password" name="loginPassword" [(ngModel)]="loginPassword" (input)="sendData()">
+    <button (click)="checkLogin()">Log In</button>
+  </form>
+  <div class="logged-notification">
+    <p>
+      This is test authentication.
+    </p>
+    <p>
+      You don't need to enter login and password!
+    </p>
+  </div>
+</section>

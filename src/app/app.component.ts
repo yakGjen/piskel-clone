@@ -1,95 +1,62 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {UpdateCanvasSizeService} from './shared/update-canvas-size.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthServiceService} from './shared/auth/auth-service.service';
+import {LoginEventService} from './shared/login-event.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit {
-  ngOnInit(): void {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private login: AuthServiceService,
+    private loginDataEvent: LoginEventService
+  ) {}
 
-  /*constructor(private updateCanvasSizeEvent: UpdateCanvasSizeService) {}
+  statusLogin = false;
+  statusLoginText = 'Log In';
 
-  @ViewChild('canvas') canvas;
-  layers = [];
-  selectedLayer = [];
-
-  widthCell = 0;
-  heightCell = 0;
-
-  toolInfo;
-  selectedColor;
-
-  xSize = 32;
-  ySize = 32;
+  loginData = '';
+  passwordData = '';
 
   ngOnInit() {
-    this.widthCell = this.canvas.canvas.nativeElement.offsetWidth / this.xSize;
-    this.heightCell = this.canvas.canvas.nativeElement.offsetHeight / this.ySize;
-
-    if (localStorage.length) {
-      console.log('from localstorage');
-      this.layers = JSON.parse(localStorage.getItem('layers'));
-    }
-    // localStorage.clear();
-
-    window.onunload = () => {
-      localStorage.clear();
-      // localStorage.setItem('layers', JSON.stringify(this.layers));
-    };
-  }
-
-  addLayer() {
-    const layer = [];
-    for (let i = 0; i < this.ySize; i++) {
-      for (let j = 0; j < this.xSize; j++) {
-        layer.push({
-          x: j * this.widthCell,
-          y: i * this.heightCell,
-          color: 'transparent',
-        });
+    this.loginDataEvent.loginData.subscribe((data) => {
+      if (data === null) {
+        console.log('ok');
+        this.checkLogin();
+      } else {
+        this.loginData = data.login;
+        this.passwordData = data.password;
       }
+    });
+  }
+
+  checkLogin() {
+    if (this.statusLogin) {
+
+      this.login.logOut();
+
+      this.statusLogin = false;
+      this.statusLoginText = 'Log In';
+      this.router.navigate(['/'], {relativeTo: this.route});
+
+    } else {
+      if (this.loginData === '' && this.passwordData === '') {
+        this.login.logIn();
+
+        this.statusLogin = true;
+        this.statusLoginText = 'Log Out';
+        this.router.navigate(['/main'], {relativeTo: this.route});
+      }
+      /*this.login.logIn();
+
+      this.statusLogin = true;
+      this.statusLoginText = 'Log Out';
+      this.router.navigate(['/main'], {relativeTo: this.route});*/
     }
-    this.layers.push(layer);
   }
-
-  deleteLayer(numb) {
-    this.layers.splice(numb, 1);
-  }
-
-  copyLayer(numb) {
-    const copyElem = this.layers[numb - 1];
-    this.layers.push(copyElem);
-  }
-
-  selectNumbLayer(numb) {
-    this.selectedLayer = this.layers[numb - 1];
-  }
-
-  takeTool(obj) {
-    this.toolInfo = obj;
-  }
-
-  takeColor(color) {
-    this.selectedColor = color;
-  }
-
-  takeSize(size) {
-    console.log(size);
-    this.xSize = size;
-    this.ySize = size;
-
-    this.updateCanvasSize();
-  }
-
-  updateCanvasSize() {
-    console.log('update canvas size and send event from app component');
-    this.widthCell = this.canvas.canvas.nativeElement.offsetWidth / this.xSize;
-    this.heightCell = this.canvas.canvas.nativeElement.offsetHeight / this.ySize;
-
-    this.layers = [];
-
-    this.updateCanvasSizeEvent.updateCanvasSize.emit();
-  }*/
 }
