@@ -26,7 +26,7 @@ const routes: Routes = [
     ToolsComponent,
     PreviewComponent,
     HelloComponent,
-    MainComponent
+    MainComponent,
   ],
   imports: [
     BrowserModule,
