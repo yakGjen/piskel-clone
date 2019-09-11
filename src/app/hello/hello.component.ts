@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component} from '@angular/core';
 import {LoginEventService} from '../shared/login-event.service';
 
 @Component({
@@ -18,7 +18,6 @@ export class HelloComponent {
   }
 
   sendData() {
-    // console.log(this.loginForm, this.loginPassword);
     this.loginDataEvent.loginData.emit({
       login: this.loginForm,
       password: this.loginPassword

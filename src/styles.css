@@ -42,35 +42,6 @@ body {
   align-items: center;
   flex-direction: column;
   box-sizing: border-box;
-  /*border: solid 1px yellow;*/
-}
-.toolbar .tools-size {
-  text-align: center;
-}
-.toolbar .tools-size-item {
-  width: 20px;
-  height: 20px;
-  display: inline-block;
-  box-sizing: border-box;
-  border: solid 3px #444444;
-  cursor: pointer;
-}
-.toolbar .tools-size-item > div {
-  width: 100%;
-  height: 100%;
-  background: #ffffff;
-}
-.toolbar .tools-size-item:nth-child(1) {
-  padding: 5px;
-}
-.toolbar .tools-size-item:nth-child(2) {
-  padding: 4px;
-}
-.toolbar .tools-size-item:nth-child(3) {
-  padding: 3px;
-}
-.toolbar .tools-size-item:nth-child(4) {
-  padding: 2px;
 }
 .toolbar .tools-items {
   display: flex;

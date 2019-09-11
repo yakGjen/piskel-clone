@@ -1,10 +1,4 @@
 <section class="tools">
-  <div class="tools-size">
-    <div class="tools-size-item"><div></div></div>
-    <div class="tools-size-item"><div></div></div>
-    <div class="tools-size-item"><div></div></div>
-    <div class="tools-size-item"><div></div></div>
-  </div>
   <div #toolsItems (click)="getTool($event)" class="tools-items">
     <div #bucket data-tool="bucket" class="tools-items-item tools-items-bucket">
       <i class="fas fa-fill-drip"></i>
@@ -15,10 +9,6 @@
     <div #eraser data-tool="eraser" class="tools-items-item tools-items-eraser">
       <i class="fas fa-eraser"></i>
     </div>
-    <div class="tools-items-item"></div>
-    <div class="tools-items-item"></div>
-    <div class="tools-items-item"></div>
-    <div class="tools-items-item"></div>
     <div class="tools-items-item"></div>
   </div>
   <div class="tools-colors">

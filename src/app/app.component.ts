@@ -24,9 +24,10 @@ export class AppComponent implements OnInit {
   passwordData = '';
 
   ngOnInit() {
+    this.router.navigate(['/'], {relativeTo: this.route});
+
     this.loginDataEvent.loginData.subscribe((data) => {
       if (data === null) {
-        console.log('ok');
         this.checkLogin();
       } else {
         this.loginData = data.login;

@@ -65,6 +65,11 @@ export class CanvasComponent implements OnInit {
       this.drawEraser(numbCell);
       return;
     }
+
+    if (this.toolInfo.enabledTool === true && this.toolInfo.tool === 'bucket') {
+      this.drawBucket(numbCell, this.selectedColor);
+      return;
+    }
     return;
   }
 
@@ -77,6 +82,28 @@ export class CanvasComponent implements OnInit {
   drawEraser(numbCell) {
     this.context.clearRect(this.layer[numbCell - 1].x, this.layer[numbCell - 1].y, this.widthCell, this.heightCell);
     this.layer[numbCell - 1].color = 'transparent';
+  }
+
+  drawBucket(numbCell, color = 'transparent') {
+    const changeableColor = this.layer[numbCell - 1].color;
+    this.context.fillStyle = color;
+
+    if (color === 'transparent') {
+      this.layer.forEach((cell) => {
+        if (cell.color === changeableColor) {
+          this.context.clearRect(cell.x, cell.y, this.widthCell, this.heightCell);
+          cell.color = color;
+        }
+      });
+      return;
+    }
+
+    this.layer.forEach((cell) => {
+      if (cell.color === changeableColor) {
+        this.context.fillRect(cell.x, cell.y, this.widthCell, this.heightCell);
+        cell.color = color;
+      }
+    });
   }
 
 }
