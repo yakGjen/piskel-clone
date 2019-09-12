@@ -32,18 +32,15 @@ export class LayersComponent implements OnInit {
 
     this.layersWrapper = this.layersWrapObj.nativeElement;
 
-    /*this.addLayer();
-    this.selectLayer(this.storageLayers[0]);*/
-    if (localStorage.length) {
-      this.layers.forEach((layer, i) => {
-        this.addLayer();
-      });
-    } else {
+    if (this.layers.length === 0) {
       this.addLayer();
+      setTimeout(() => this.selectLayer(this.storageLayers[0]), 0);
+    } else {
+      this.layers.forEach((layer, i) => {
+        this.addLayerHere();
+      });
+      setTimeout(() => this.selectLayer(this.storageLayers[0]), 0);
     }
-    // this.selectLayer(this.storageLayers[0]);
-    setTimeout(() => this.selectLayer(this.storageLayers[0]), 0);
-    localStorage.clear();
   }
 
   addHtmlLayer() {
@@ -62,6 +59,11 @@ export class LayersComponent implements OnInit {
     return newLayer;
   }
 
+  addLayerHere() {
+    this.storageLayers.push(this.addHtmlLayer());
+    this.layersWrapper.appendChild(this.storageLayers[this.storageLayers.length - 1]);
+  }
+
   addLayer() {
     if (this.storageLayers.length >= 5) {
       this.disableButton = true;
@@ -72,10 +74,7 @@ export class LayersComponent implements OnInit {
 
     this.layersWrapper.appendChild(this.storageLayers[this.storageLayers.length - 1]);
 
-    if (localStorage.length === 0) {
-      this.addLayerEvent.emit();
-    }
-    // this.addLayerEvent.emit();
+    this.addLayerEvent.emit();
   }
 
   deleteLayer(elem) {
@@ -159,7 +158,6 @@ export class LayersComponent implements OnInit {
   }
 
   updateCanvasSize() {
-    console.log('clear layers storage');
     this.storageLayers.forEach((layer) => {
       this.layersWrapper.removeChild(layer);
     });

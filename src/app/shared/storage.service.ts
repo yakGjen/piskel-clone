@@ -4,21 +4,19 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class StorageService {
-  saveUser(login, password, layers) {
-    console.log('user was saved');
-    localStorage.removeItem(login);
+  saveUser(login, password, size, layers) {
     localStorage.setItem(login, JSON.stringify({
       password,
+      size,
       layers
     }));
   }
 
   getUser(login, password) {
     if (login in localStorage) {
-      console.log('localstorage has a user');
-      const data = JSON.parse(login);
+      const data = JSON.parse(localStorage.getItem(login));
       if (password === data.password) {
-        return data.layers;
+        return data;
       }
     }
   }

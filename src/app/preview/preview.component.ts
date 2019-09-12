@@ -30,7 +30,6 @@ export class PreviewComponent implements OnInit, OnDestroy {
       this.gridCoordinats = [];
 
       setTimeout(() => {
-        console.log(this.xSize, this.ySize);
         this.getGridCoordinats(this.xSize, this.ySize);
         this.animation();
       }, 0);

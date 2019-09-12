@@ -1,14 +1,20 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {UpdateCanvasSizeService} from '../shared/update-canvas-size.service';
+import {LoginEventService} from '../shared/login-event.service';
+import {StorageService} from '../shared/storage.service';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
 
-  constructor(private updateCanvasSizeEvent: UpdateCanvasSizeService) {}
+  constructor(
+    private updateCanvasSizeEvent: UpdateCanvasSizeService,
+    private loginDataEvent: LoginEventService,
+    private storageService: StorageService
+  ) {}
 
   @ViewChild('canvas') canvas;
   layers = [];
@@ -23,20 +29,36 @@ export class MainComponent implements OnInit {
   xSize = 32;
   ySize = 32;
 
+  loginData = '';
+  passwordData = '';
+
   ngOnInit() {
+    this.loginDataEvent.loginData.subscribe((data) => {
+      if (data !== null) {
+        this.loginData = data.login;
+        this.passwordData = data.password;
+      }
+    });
+
+    const savedObj = this.storageService.getUser(this.loginData, this.passwordData);
+
+    if (savedObj) {
+      this.layers = savedObj.layers;
+      this.xSize = savedObj.size;
+      this.ySize = savedObj.size;
+    }
+
     this.widthCell = this.canvas.canvas.nativeElement.offsetWidth / this.xSize;
     this.heightCell = this.canvas.canvas.nativeElement.offsetHeight / this.ySize;
 
-    if (localStorage.length) {
-      console.log('from localstorage');
-      this.layers = JSON.parse(localStorage.getItem('layers'));
-    }
-    // localStorage.clear();
-
     window.onunload = () => {
-      localStorage.clear();
-      // localStorage.setItem('layers', JSON.stringify(this.layers));
+      this.storageService.saveUser(this.loginData, this.passwordData, this.xSize, this.layers);
     };
+  }
+
+  ngOnDestroy() {
+    window.onunload = null;
+    this.storageService.saveUser(this.loginData, this.passwordData, this.xSize, this.layers);
   }
 
   addLayer() {
