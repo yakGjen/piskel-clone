@@ -81,6 +81,17 @@ export class CanvasComponent implements OnInit {
     }
   }
 
+  allowToDrawBucket(event) {
+    const posX = Math.floor(event.offsetX / this.widthCell);
+    const posY = Math.floor(event.offsetY / this.heightCell);
+
+    const numbCell = Math.floor(event.offsetY / this.heightCell) * this.xSize + Math.floor(event.offsetX / this.widthCell + 1);
+
+    if (this.toolInfo.enabledTool === true && this.toolInfo.tool === 'bucket') {
+      this.drawBucket(numbCell, this.selectedColor);
+    }
+  }
+
   drawPen(numbCell, color = 'transparent') {
     this.context.fillStyle = color;
     this.context.fillRect(this.layer[numbCell - 1].x, this.layer[numbCell - 1].y, this.widthCell, this.heightCell);
