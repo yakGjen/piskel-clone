@@ -25,6 +25,8 @@ export class CanvasComponent implements OnInit {
 
   context;
 
+  allowToDraw = false;
+
   ngOnInit() {
     this.redraw.redrawEvent.subscribe(() => {
       setTimeout(() => this.redrawCanvas(), 0);
@@ -50,27 +52,33 @@ export class CanvasComponent implements OnInit {
     });
   }
 
+  changeAllowToDraw(allow) {
+    this.allowToDraw = allow;
+  }
+
   draw(event) {
-    const posX = Math.floor(event.offsetX / this.widthCell);
-    const posY = Math.floor(event.offsetY / this.heightCell);
+    if (this.allowToDraw) {
+      const posX = Math.floor(event.offsetX / this.widthCell);
+      const posY = Math.floor(event.offsetY / this.heightCell);
 
-    const numbCell = Math.floor(event.offsetY / this.heightCell) * this.xSize + Math.floor(event.offsetX / this.widthCell + 1);
+      const numbCell = Math.floor(event.offsetY / this.heightCell) * this.xSize + Math.floor(event.offsetX / this.widthCell + 1);
 
-    if (this.toolInfo.enabledTool === true && this.toolInfo.tool === 'pen') {
-      this.drawPen(numbCell, this.selectedColor);
+      if (this.toolInfo.enabledTool === true && this.toolInfo.tool === 'pen') {
+        this.drawPen(numbCell, this.selectedColor);
+        return;
+      }
+
+      if (this.toolInfo.enabledTool === true && this.toolInfo.tool === 'eraser') {
+        this.drawEraser(numbCell);
+        return;
+      }
+
+      if (this.toolInfo.enabledTool === true && this.toolInfo.tool === 'bucket') {
+        this.drawBucket(numbCell, this.selectedColor);
+        return;
+      }
       return;
     }
-
-    if (this.toolInfo.enabledTool === true && this.toolInfo.tool === 'eraser') {
-      this.drawEraser(numbCell);
-      return;
-    }
-
-    if (this.toolInfo.enabledTool === true && this.toolInfo.tool === 'bucket') {
-      this.drawBucket(numbCell, this.selectedColor);
-      return;
-    }
-    return;
   }
 
   drawPen(numbCell, color = 'transparent') {

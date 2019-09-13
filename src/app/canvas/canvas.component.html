@@ -1,1 +1,8 @@
-<canvas #canvas width="512" height="512" (click)="draw($event)"></canvas>
+<canvas
+    #canvas
+    width="512"
+    height="512"
+    (mousedown)="changeAllowToDraw(true)"
+    (mouseup)="changeAllowToDraw(false)"
+    (mousemove)="draw($event)"
+></canvas>
