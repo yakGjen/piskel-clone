@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 import { AppComponent } from './app.component';
 import { LayersComponent } from './layers/layers.component';
 import { CanvasComponent } from './canvas/canvas.component';
@@ -15,7 +17,7 @@ import {AuthGuardServiceService} from './shared/auth/auth-guard-service.service'
 const routes: Routes = [
   {path: '', component: HelloComponent},
   {path: 'main', component: MainComponent, canActivate: [AuthGuardServiceService]},
-  {path: '**', redirectTo: '/'}
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
@@ -31,7 +33,9 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {
+      useHash: true
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
